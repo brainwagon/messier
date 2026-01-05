@@ -199,10 +199,20 @@ function updateUI() {
     
     // Iterate by hour
     let current = new Date(startTime);
-    // Round up to next hour
+    // Round down to current hour so we show the current block
     current.setMinutes(0, 0, 0);
-    if (current < startTime) current.setHours(current.getHours() + 1);
-
+    // If rounding down puts us before the actual calculated start time (e.g. strict dusk), 
+    // it's fine because we generally want to see the "18:00" block even if dusk is 18:15.
+    // However, if the user logic "start from now" was triggered, "now" is e.g. 22:30.
+    // Rounding down gives 22:00. This is desired.
+    
+    // Original code rounded up: 
+    // if (current < startTime) current.setHours(current.getHours() + 1);
+    
+    // We remove the round-up logic. 
+    // But we must ensure we don't go backwards before the absolute night start if we aren't in "current time" mode?
+    // Actually, rounding down is generally safer for "What is visible in this hour block".
+    
     let hasHours = false;
 
     while (current < endTime) {
