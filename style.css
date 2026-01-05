@@ -8,13 +8,85 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
 h1 {
     color: #38bdf8;
     text-align: center;
+}
+
+/* ... existing button styles ... */
+
+.content-wrapper {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.main-content {
+    flex: 3;
+    min-width: 0; /* Fix grid overflow issues */
+}
+
+.sidebar {
+    flex: 1;
+    min-width: 250px;
+    position: sticky;
+    top: 20px;
+}
+
+.sidebar-box {
+    background-color: #1e293b;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    font-size: 0.95em;
+}
+
+.sidebar-box h3 {
+    margin-top: 0;
+    color: #38bdf8;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 10px;
+}
+
+.sidebar-box p {
+    margin-bottom: 15px;
+    color: #cbd5e1;
+}
+
+.sidebar-box hr {
+    border: 0;
+    border-top: 1px solid #334155;
+    margin: 20px 0;
+}
+
+.credits {
+    font-size: 0.85em;
+    color: #94a3b8;
+    font-style: italic;
+}
+
+.credits a {
+    color: #38bdf8;
+    text-decoration: none;
+}
+
+.credits a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column-reverse; /* Put sidebar below on mobile? Or above? Let's put it below or just column */
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        position: static;
+    }
 }
 
 button {
