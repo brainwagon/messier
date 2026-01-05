@@ -252,7 +252,7 @@ function updateUI() {
                             <div class="messier-id">
                                 <a href="${wikiUrl}" target="_blank" title="View on Wikipedia">${obj.id}</a>
                             </div>
-                            <div class="messier-details">Alt: ${obj.alt.toFixed(1)}°</div>
+                            <div class="messier-details">Alt: ${obj.alt.toFixed(1)}°, Az: ${obj.az.toFixed(1)}°</div>
                             <div class="messier-details">Mag: ${obj.mag}</div>
                             <div class="messier-details">${obj.constellation}</div>
                         </div>
@@ -332,7 +332,8 @@ function getVisibleObjects(date, loc) {
         const alt = Astronomy.calculateAltitude(obj.ra, obj.dec, loc.lat, lst);
         
         if (alt >= VISIBILITY_THRESHOLD) {
-            visible.push({ ...obj, alt });
+            const az = Astronomy.calculateAzimuth(obj.ra, obj.dec, loc.lat, lst);
+            visible.push({ ...obj, alt, az });
         }
     });
 
@@ -410,6 +411,27 @@ const Astronomy = {
         const altRad = Math.asin(sinAlt);
 
         return Astronomy.rad2deg(altRad);
+    },
+
+    // Calculate Azimuth of an object (0 = North, 90 = East, etc.)
+    calculateAzimuth: (ra, dec, lat, lst) => {
+        let H = lst - ra;
+        if (H < 0) H += 360;
+
+        const latRad = Astronomy.deg2rad(lat);
+        const decRad = Astronomy.deg2rad(dec);
+        const HRad = Astronomy.deg2rad(H);
+
+        // Azimuth formula from North
+        // tan A = (-sin H cos dec) / (sin dec cos lat - sin lat cos dec cos H)
+        const y = -Math.sin(HRad) * Math.cos(decRad);
+        const x = Math.sin(decRad) * Math.cos(latRad) - Math.cos(decRad) * Math.sin(latRad) * Math.cos(HRad);
+
+        let azRad = Math.atan2(y, x);
+        let az = Astronomy.rad2deg(azRad);
+        if (az < 0) az += 360;
+        
+        return az;
     },
 
     // Calculate Twilight Times (Morning/Evening)
