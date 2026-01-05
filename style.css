@@ -200,16 +200,24 @@ button {
     margin: 0;
 }
 
-.hidden {
-    display: none;
-}
-
 #info-panel {
     background-color: #1e293b;
-    padding: 15px;
+    padding: 10px 15px;
     border-radius: 8px;
     margin-bottom: 20px;
     border: 1px solid #334155;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 0.9em;
+}
+
+.info-item {
+    white-space: nowrap;
+}
+
+#info-panel.hidden {
+    display: none;
 }
 
 .timeline-hour {
