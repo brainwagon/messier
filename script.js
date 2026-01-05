@@ -38,7 +38,7 @@ function getUserLocation() {
             lon: position.coords.longitude
         };
         localStorage.setItem('messier_user_loc', JSON.stringify(userLocation));
-        status.textContent = "Location found!";
+        status.textContent = "";
         populateInputs(userLocation);
         updateUI();
         
@@ -80,7 +80,7 @@ function setManualLocation() {
     status.classList.remove('warning');
     userLocation = { lat, lon, city };
     localStorage.setItem('messier_user_loc', JSON.stringify(userLocation));
-    status.textContent = "Manual location set!";
+    status.textContent = "";
     updateUI();
 }
 
@@ -115,7 +115,7 @@ async function searchLocation() {
         userLocation = { lat, lon, city: displayName };
         localStorage.setItem('messier_user_loc', JSON.stringify(userLocation));
         
-        status.textContent = `Found: ${result.display_name}`;
+        status.textContent = "";
         populateInputs(userLocation);
         updateUI();
 
