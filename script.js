@@ -5,11 +5,13 @@ const VISIBILITY_THRESHOLD = 15; // Degrees above horizon to be considered "good
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('getLocationBtn').addEventListener('click', getUserLocation);
+    document.getElementById('setManualLocationBtn').addEventListener('click', setManualLocation);
     
     // Auto-load if we can (optional, but button is safer for permissions)
     const savedLoc = localStorage.getItem('messier_user_loc');
     if (savedLoc) {
         userLocation = JSON.parse(savedLoc);
+        populateInputs(userLocation);
         updateUI();
     }
 });
@@ -30,6 +32,7 @@ function getUserLocation() {
         };
         localStorage.setItem('messier_user_loc', JSON.stringify(userLocation));
         status.textContent = "Location found!";
+        populateInputs(userLocation);
         updateUI();
         
         // Fetch city name
@@ -37,6 +40,7 @@ function getUserLocation() {
             if (city) {
                 userLocation.city = city;
                 localStorage.setItem('messier_user_loc', JSON.stringify(userLocation));
+                populateInputs(userLocation);
                 updateUI();
             }
         });
@@ -46,6 +50,38 @@ function getUserLocation() {
         // userLocation = { lat: 51.4934, lon: 0.0098 };
         // updateUI();
     });
+}
+
+function setManualLocation() {
+    const lat = parseFloat(document.getElementById('lat-input').value);
+    const lon = parseFloat(document.getElementById('lon-input').value);
+    const city = document.getElementById('city-input').value;
+    const status = document.getElementById('status');
+
+    if (isNaN(lat) || isNaN(lon)) {
+        status.textContent = "Please enter valid latitude and longitude.";
+        status.classList.add('warning');
+        return;
+    }
+
+    if (lat < -90 || lat > 90 || lon < -180 || lon > 180) {
+        status.textContent = "Coordinates out of range.";
+        status.classList.add('warning');
+        return;
+    }
+
+    status.classList.remove('warning');
+    userLocation = { lat, lon, city };
+    localStorage.setItem('messier_user_loc', JSON.stringify(userLocation));
+    status.textContent = "Manual location set!";
+    updateUI();
+}
+
+function populateInputs(loc) {
+    if (!loc) return;
+    document.getElementById('lat-input').value = loc.lat.toFixed(4);
+    document.getElementById('lon-input').value = loc.lon.toFixed(4);
+    document.getElementById('city-input').value = loc.city || '';
 }
 
 async function fetchCityName(lat, lon) {

@@ -12,6 +12,15 @@
         <p id="status">Requesting location...</p>
         <div id="controls">
             <button id="getLocationBtn">Use My Location</button>
+            <div id="manual-location">
+                <p>— or enter coordinates —</p>
+                <div class="input-group">
+                    <input type="number" id="lat-input" step="any" placeholder="Latitude (e.g. 40.7)">
+                    <input type="number" id="lon-input" step="any" placeholder="Longitude (e.g. -74.0)">
+                    <input type="text" id="city-input" placeholder="City Name (Optional)">
+                    <button id="setManualLocationBtn">Set Location</button>
+                </div>
+            </div>
         </div>
         
         <div id="info-panel" class="hidden">

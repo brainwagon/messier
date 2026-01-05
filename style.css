@@ -33,6 +33,40 @@ button:hover {
     background-color: #0ea5e9;
 }
 
+#manual-location {
+    text-align: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #334155;
+}
+
+#manual-location p {
+    color: #94a3b8;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.input-group input {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    color: #f1f5f9;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+#setManualLocationBtn {
+    margin: 10px 0;
+    width: 100%;
+}
+
 .hidden {
     display: none;
 }
