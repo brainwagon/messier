@@ -12,9 +12,31 @@ body {
     margin: 0 auto;
 }
 
-h1 {
+.app-header {
+    position: relative;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+    margin-bottom: 20px;
+    background-color: #020617;
+    border: 1px solid #334155;
+}
+
+.banner-image {
+    height: 150px;
+    background-image: url('banner.svg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.8;
+}
+
+.app-header h1 {
+    position: absolute;
+    bottom: 20px;
+    left: 30px;
+    margin: 0;
     color: #38bdf8;
-    text-align: center;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    font-size: 2.5em;
 }
 
 /* ... existing button styles ... */
