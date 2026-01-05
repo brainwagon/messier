@@ -188,6 +188,13 @@ function updateUI() {
     // Handle wrap around midnight if dusk is after dawn (shouldn't happen with correct logic, but careful)
     if (endTime < startTime) endTime.setDate(endTime.getDate() + 1);
 
+    // If we are currently IN the night (between dusk and dawn), start from now.
+    // User requested: "if the current time is less than the start of astronomical twilight, then display the entire night." (Implicitly: otherwise start from now)
+    // Also "If it is between sunrise and sunset [sic - likely meant sunset and sunrise], then do not bother displaying any information before the current hour."
+    if (now > startTime && now < endTime) {
+        startTime = new Date(now);
+    }
+
     timeline.innerHTML = '';
     
     // Iterate by hour
