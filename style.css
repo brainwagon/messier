@@ -29,65 +29,77 @@ button {
     margin: 20px auto;
 }
 
-button:hover {
-    background-color: #0ea5e9;
-}
-
-#manual-location {
-    text-align: center;
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid #334155;
-}
-
-#manual-location p {
-    color: #94a3b8;
-    font-size: 0.9em;
-    margin-bottom: 10px;
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 300px;
-    margin: 0 auto;
-}
-
-.search-box {
-    display: flex;
-    gap: 5px;
-}
-
-.search-box input {
-    flex-grow: 1;
-}
-
-.search-box button {
-    margin: 0;
-    padding: 8px 12px;
-    font-size: 0.9em;
-}
-
-.divider {
-    font-size: 0.8em;
-    color: #64748b;
-    text-align: center;
-    margin: 5px 0;
-    position: relative;
-}
-
-.input-group input {
+.compact-controls {
     background-color: #1e293b;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    margin-bottom: 20px;
+}
+
+.control-bar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.control-bar button {
+    margin: 0;
+    white-space: nowrap;
+}
+
+.control-bar input {
+    flex-grow: 1;
+    min-width: 150px;
+    background-color: #0f172a;
     border: 1px solid #334155;
     color: #f1f5f9;
     padding: 8px 12px;
     border-radius: 5px;
 }
 
-#setManualLocationBtn {
-    margin: 10px 0;
-    width: 100%;
+.link-btn {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    text-decoration: underline;
+    font-size: 0.85em;
+    padding: 5px 0;
+    margin: 5px 0 0 0;
+    width: auto;
+    display: inline-block;
+}
+
+.link-btn:hover {
+    background: none;
+    color: #38bdf8;
+}
+
+#manual-coords-container {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #334155;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.coords-row {
+    display: flex;
+    gap: 10px;
+}
+
+.coords-row input {
+    flex: 1;
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    color: #f1f5f9;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.coords-row button {
+    margin: 0;
 }
 
 .hidden {

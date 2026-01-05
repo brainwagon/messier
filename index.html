@@ -10,20 +10,23 @@
     <div class="container">
         <h1>Messier Marathon Helper</h1>
         <p id="status">Requesting location...</p>
-        <div id="controls">
-            <button id="getLocationBtn">Use My Location</button>
-            <div id="manual-location">
-                <p>— or enter location —</p>
-                <div class="input-group">
-                    <div class="search-box">
-                        <input type="text" id="location-search-input" placeholder="Search City, State (e.g. Austin, TX)">
-                        <button id="searchLocationBtn">Search</button>
-                    </div>
-                    <div class="divider">or set coordinates manually</div>
-                    <input type="number" id="lat-input" step="any" placeholder="Latitude (e.g. 40.7)">
-                    <input type="number" id="lon-input" step="any" placeholder="Longitude (e.g. -74.0)">
-                    <input type="text" id="city-input" placeholder="Custom Label (Optional)">
-                    <button id="setManualLocationBtn">Set Coordinates</button>
+        <div id="controls" class="compact-controls">
+            <div class="control-bar">
+                <button id="getLocationBtn" title="Use My Device Location">📍 Use GPS</button>
+                <input type="text" id="location-search-input" placeholder="Search City (e.g. Paris, TX)">
+                <button id="searchLocationBtn">Search</button>
+            </div>
+            
+            <button id="toggleManualBtn" class="link-btn">Show Manual Coordinates</button>
+            
+            <div id="manual-coords-container" class="hidden">
+                <div class="coords-row">
+                    <input type="number" id="lat-input" step="any" placeholder="Latitude">
+                    <input type="number" id="lon-input" step="any" placeholder="Longitude">
+                </div>
+                <div class="coords-row">
+                    <input type="text" id="city-input" placeholder="Location Name">
+                    <button id="setManualLocationBtn">Set</button>
                 </div>
             </div>
         </div>

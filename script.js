@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('getLocationBtn').addEventListener('click', getUserLocation);
     document.getElementById('setManualLocationBtn').addEventListener('click', setManualLocation);
     document.getElementById('searchLocationBtn').addEventListener('click', searchLocation);
+    document.getElementById('toggleManualBtn').addEventListener('click', () => {
+        const container = document.getElementById('manual-coords-container');
+        const btn = document.getElementById('toggleManualBtn');
+        container.classList.toggle('hidden');
+        btn.textContent = container.classList.contains('hidden') ? "Show Manual Coordinates" : "Hide Manual Coordinates";
+    });
     
     // Auto-load if we can (optional, but button is safer for permissions)
     const savedLoc = localStorage.getItem('messier_user_loc');
