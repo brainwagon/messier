@@ -13,12 +13,17 @@
         <div id="controls">
             <button id="getLocationBtn">Use My Location</button>
             <div id="manual-location">
-                <p>— or enter coordinates —</p>
+                <p>— or enter location —</p>
                 <div class="input-group">
+                    <div class="search-box">
+                        <input type="text" id="location-search-input" placeholder="Search City, State (e.g. Austin, TX)">
+                        <button id="searchLocationBtn">Search</button>
+                    </div>
+                    <div class="divider">or set coordinates manually</div>
                     <input type="number" id="lat-input" step="any" placeholder="Latitude (e.g. 40.7)">
                     <input type="number" id="lon-input" step="any" placeholder="Longitude (e.g. -74.0)">
-                    <input type="text" id="city-input" placeholder="City Name (Optional)">
-                    <button id="setManualLocationBtn">Set Location</button>
+                    <input type="text" id="city-input" placeholder="Custom Label (Optional)">
+                    <button id="setManualLocationBtn">Set Coordinates</button>
                 </div>
             </div>
         </div>

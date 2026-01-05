@@ -54,6 +54,29 @@ button:hover {
     margin: 0 auto;
 }
 
+.search-box {
+    display: flex;
+    gap: 5px;
+}
+
+.search-box input {
+    flex-grow: 1;
+}
+
+.search-box button {
+    margin: 0;
+    padding: 8px 12px;
+    font-size: 0.9em;
+}
+
+.divider {
+    font-size: 0.8em;
+    color: #64748b;
+    text-align: center;
+    margin: 5px 0;
+    position: relative;
+}
+
 .input-group input {
     background-color: #1e293b;
     border: 1px solid #334155;

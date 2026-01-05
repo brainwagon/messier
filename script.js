@@ -6,6 +6,7 @@ const VISIBILITY_THRESHOLD = 15; // Degrees above horizon to be considered "good
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('getLocationBtn').addEventListener('click', getUserLocation);
     document.getElementById('setManualLocationBtn').addEventListener('click', setManualLocation);
+    document.getElementById('searchLocationBtn').addEventListener('click', searchLocation);
     
     // Auto-load if we can (optional, but button is safer for permissions)
     const savedLoc = localStorage.getItem('messier_user_loc');
@@ -75,6 +76,48 @@ function setManualLocation() {
     localStorage.setItem('messier_user_loc', JSON.stringify(userLocation));
     status.textContent = "Manual location set!";
     updateUI();
+}
+
+async function searchLocation() {
+    const query = document.getElementById('location-search-input').value;
+    const status = document.getElementById('status');
+    
+    if (!query) return;
+
+    status.textContent = "Searching...";
+    status.classList.remove('warning');
+
+    try {
+        const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`);
+        if (!response.ok) throw new Error("Search failed");
+        
+        const data = await response.json();
+        
+        if (data.length === 0) {
+            status.textContent = "Location not found. Try a different name.";
+            status.classList.add('warning');
+            return;
+        }
+
+        const result = data[0];
+        const lat = parseFloat(result.lat);
+        const lon = parseFloat(result.lon);
+        // Use the display name or just the first part (often too long)
+        // Let's try to extract a simpler name or just use the query if it was found
+        const displayName = result.display_name.split(',')[0]; 
+        
+        userLocation = { lat, lon, city: displayName };
+        localStorage.setItem('messier_user_loc', JSON.stringify(userLocation));
+        
+        status.textContent = `Found: ${result.display_name}`;
+        populateInputs(userLocation);
+        updateUI();
+
+    } catch (e) {
+        console.error("Search error", e);
+        status.textContent = "Error searching for location.";
+        status.classList.add('warning');
+    }
 }
 
 function populateInputs(loc) {
